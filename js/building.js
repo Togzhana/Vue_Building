@@ -1,4 +1,4 @@
-const heroku_url_api = "https://faircorpapptogzhan.cleverapps.io/api/building";
+const spring_api_building= "https://faircorp-app-ce.cleverapps.io/api/buildings";
 
 const vm = new Vue({
     el: '#app_build',
@@ -6,7 +6,7 @@ const vm = new Vue({
         buildings: [],
     },
     mounted() {
-        axios.get(heroku_url_api)
+        axios.get(spring_api_building)
             .then(response => {this.buildings = response.data});
     },
 

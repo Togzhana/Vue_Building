@@ -1,4 +1,4 @@
-const heroku_url_api2 = "https://faircorpapptogzhan.cleverapps.io/api/rooms";
+const spring_api_room = "https://faircorp-app-ce.cleverapps.io/api/rooms";
 
 const vm2 = new Vue({
     el: '#app_room',
@@ -7,7 +7,7 @@ const vm2 = new Vue({
 
     },
     mounted() {
-        axios.get(heroku_url_api2)
+        axios.get(spring_api_room)
             .then(response => {this.rooms = response.data});
     }
 });

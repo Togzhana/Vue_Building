@@ -1,4 +1,4 @@
-const heroku_url_api_3 = "https://faircorp-app-ce.cleverapps.io/api/lights";
+const spring_api_light = "https://faircorp-app-ce.cleverapps.io/api/lights";
 
 const vm3 = new Vue({
   el: '#app_light',
@@ -8,7 +8,7 @@ const vm3 = new Vue({
     connected:false
   },
   mounted() {
-    axios.get(heroku_url_api_3)
+    axios.get(spring_api_light)
     .then(response => {this.lights = response.data});
     this.connect();
   },
@@ -19,7 +19,7 @@ const vm3 = new Vue({
   methods: {
     switchLight(light) {
       //this.selectedLight = light;
-      let post_url3 = heroku_url_api_3 + "/" + light.id+"/switch";
+      let post_url3 = spring_api_light + "/" + light.id+"/switch";
       //  console.info(lightId);
       //{lightId: light.id}
       axios.put(post_url3)

@@ -1,4 +1,4 @@
-const heroku_url_api_4 = "https://faircorp-app-ce.cleverapps.io/api/temperature-sensors";
+const spring_api_temperature = "https://faircorp-app-ce.cleverapps.io/api/temperature-sensors";
 
 const vm4 = new Vue({
   el: '#app_temp',
@@ -7,7 +7,7 @@ const vm4 = new Vue({
   },
 
   mounted() {
-    axios.get(heroku_url_api_4)
+    axios.get(spring_api_temperature)
     .then(response => {this.tempSensors = response.data});
     this.connect();
   },

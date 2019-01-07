@@ -1,4 +1,4 @@
-const heroku_url_api_5 = "https://faircorp-app-ce.cleverapps.io/api/humidity-sensors";
+const spring_api_humidity = "https://faircorp-app-ce.cleverapps.io/api/humidity-sensors";
 
 const vm5 = new Vue({
   el: '#app_hum',
@@ -7,7 +7,7 @@ const vm5 = new Vue({
   },
 
   mounted() {
-    axios.get(heroku_url_api_5)
+    axios.get(spring_api_humidity)
     .then(response => {this.hmdtSensors = response.data});
     this.connect();
   },
