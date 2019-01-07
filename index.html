@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Building</title>
+	<meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+			integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+</head>
+<body>
+  <h3>Buildings</h3>
+	<div class="limiter">
+		<div class="container-table100">
+
+			<div class="wrap-table100">
+<!--===============================================================================================-->
+				<h3 class="text-center">Buildings</h3>
+				<div class="table100 ver1 m-b-110" id = "app_build">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Building ID</th>
+									<th class="cell100 column2">Building Name</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr class="row100 body" v-for="building in buildings">
+									<td class="cell100 column1">{{ building.id }}</td>
+									<td class="cell100 column2">{{ building.name }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+<!--===============================================================================================-->
+				<h3 class="text-center">Rooms</h3>
+				<div class="table100 ver2 m-b-110" id="app_room">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Room ID</th>
+									<th class="cell100 column2">Room Name</th>
+									<th class="cell100 column3">Floor</th>
+									<th class="cell100 column4">Building ID</th>
+
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr class="row100 body" v-for="room in rooms">
+									<td class="cell100 column1">{{ room.id }}</td>
+									<td class="cell100 column2">{{ room.name }}</td>
+									<td class="cell100 column3">{{ room.floor }}</td>
+									<td class="cell100 column4">{{ room.buildingId }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+<!--===============================================================================================-->
+				<h3 class="text-center">Lights</h3>
+				<div class="table100 ver3 m-b-110" id="app_light">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Light ID</th>
+									<th class="cell100 column2">Light level</th>
+									<th class="cell100 column3">Light Status</th>
+									<th class="cell100 column4">Room ID</th>
+									<th class="cell100 column5">Switch Light</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr class="row100 body" v-for="light in lights">
+									<td class="cell100 column1">{{ light.id }}</td>
+									<td class="cell100 column2">{{ light.level }}</td>
+									<td class="cell100 column3"><div v-if="light.status == 'ON'"><img src="images/light-on2.png"></div>
+			                <div v-else-if="light.status == 'OFF'"><img src="images/light-off.png"></div>
+			            </td>
+									<td class="cell100 column4">{{ light.roomId }}</td>
+									<td class="cell100 column5"><button @click="switchLight(light)" class="btn btn-light">
+		              <div v-if="light.status == 'ON'"><img src="images/switch-off.png" width="20" /></div><div v-if="light.status == 'OFF'"><img src="images/switch-on.png" width="20" /></div></button>
+		            	</td>
+								</tr>
+
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+<!--===============================================================================================-->
+				<h3 class="text-center">Temperature Sensors</h3>
+				<div class="table100 ver1 m-b-110" id = "app_temp">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">ID</th>
+									<th class="cell100 column2">Temperature</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr class="row100 body" v-for="tempSensor in tempSensors">
+									<td class="cell100 column1">{{ tempSensor.id }}</td>
+									<td class="cell100 column2">{{ tempSensor.temperature }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+<!--===============================================================================================-->
+				<h3 class="text-center">Humidity Sensors</h3>
+				<div class="table100 ver2 m-b-110" id="app_hum">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">ID</th>
+									<th class="cell100 column2">Humidity</th>
+
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr class="row100 body" v-for="hmdtSensor in hmdtSensors">
+									<td class="cell100 column1">{{ hmdtSensor.id }}</td>
+									<td class="cell100 column2">{{ hmdtSensor.humidity }}</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+<!--===============================================================================================-->
+			</div>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+
+
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	        crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	        crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	        crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="js/webstomp.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+	<script src="js/building.js"></script>
+	<script src="js/room.js"></script>
+	<script src="js/light.js"></script>
+	<script src="js/temperature.js"></script>
+	<script src="js/humidity.js"></script>
+</body>
+</html>
